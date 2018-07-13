@@ -6,15 +6,12 @@ Remove-Item *.xls
 $PurgeDelay = (Get-Date).AddDays(-7).Date
 $Removal = Get-ChildItem "C:\Datarepo" -Recurse -Include "*.xls" | Where-Object {$_.CreationTime -lt $PurgeDelay}
 
-
 $PurgeDelay = (Get-Date).AddDays(-7)
 $Removal = Get-ChildItem "C:\Datarepo" -Recurse -Include "*.xls"
 Where-Object {$_.CreationTime -lt $PurgeDelay}
 
 $PurgeDelay = (Get-Date).AddDays(-1)
 Get-ChildItem -Path "C:\Datarepo" -Name Automation -Recurse -Force | Where-Object { !$_.PSIContainer -and $_.CreationTime -lt $Purgedelay } | Remove-Item -Force -Whatif
-
-
 
 $Removal = Get-ChildItem "C:\Datarepo" -Recurse -Include "*.xls" |
 Where-Object {$_.LastWriteTime -lt (Get-Date).AddDays(-1)}
@@ -45,5 +42,5 @@ Start-Sleep -s 20
 $From = "Sender@Quartz"
 $To = "Tester@Quartz"
 $Attachment = get-childitem -Name -Filter *.xls
-#Send-MailMessage -From $From -To $To -Subject "Daily RightFax Report for failed faxes." -Body "Attached is the RightFax report in XLS" -Attachments $Attachment -dno onFailure -SmtpServer Quartz
+Send-MailMessage -From $From -To $To -Subject "Daily RightFax Report for failed faxes." -Body "Attached is the RightFax report in XLS" -Attachments $Attachment -dno onFailure -SmtpServer Quartz
 #------------------------------------------------------------------------------------------
