@@ -3,8 +3,8 @@
 Remove-Item *.xls
 #7/11-Need to revise this as its a plain sterilization of the directory. Perhaps by date.
 #7/12-Setup date purging
-$PurgeDelay = (Get-Date).AddDays(-7).Date
-$Removal = Get-ChildItem "C:\Datarepo" -Recurse -Include "*.xls" | Where-Object {$_.CreationTime -lt $PurgeDelay}
+$PurgeDelay = (Get-Date).AddDays(-3)
+Get-ChildItem "C:\Datarepo" -Recurse -Include "*.xls" | Where {$_.CreationTime -gt $PurgeDelay -and $_.Name -Match "Automation"}  | Remove-Item -Whatif
 
 $PurgeDelay = (Get-Date).AddDays(-7)
 $Removal = Get-ChildItem "C:\Datarepo" -Recurse -Include "*.xls"
